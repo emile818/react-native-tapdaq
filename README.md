@@ -13,6 +13,19 @@ Tapdaq bridge in React Native
 
 ## Usage
 
+
+import RNTapdaq from 'react-native-tapdaq'
+
+await RNTapdaq.initialize(applicationId, clientKey,TapdaqConfig);
+RNTapdaq.loadInterstitial("default");
+
+//TapdaqConfig {
+//    userSubjectToGDPR?: boolean
+//    consentGiven?: boolean
+//    isAgeRestrictedUser?: boolean
+//}
+
+
 ```javascript
 import RNTapdaq from 'react-native-tapdaq'
 

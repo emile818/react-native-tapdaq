@@ -1,0 +1,68 @@
+{
+  "name": "react-native-tapdaq",
+  "version": "1.0.1",
+  "description": "Tapdaq bridge in React Native",
+  "main": "dist/index.ts",
+  "scripts": {
+    "build:tsc": "tsc",
+    "watch": "tsc --watch",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "build": "npm run lint && npm run format && npm run build:tsc && npm pack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GieMik8/react-native-tapdaq.git"
+  },
+  "keywords": [
+    "tapdaq",
+    "react",
+    "react-native",
+    "advertisements"
+  ],
+  "author": {
+    "name": "GieMik8",
+    "email": "giemik8@gmail.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GieMik8/react-native-tapdaq/issues"
+  },
+  "homepage": "https://github.com/GieMik8/react-native-tapdaq#readme",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.59.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.17",
+    "@types/react-native": "^0.60.27",
+    "prettier": "^1.19.1",
+    "react": "^16.8.3",
+    "react-native": "^0.59.10",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.1.0",
+    "typescript": "^3.7.4"
+  },
+  "files": [
+    "dist/**/*",
+    "android/src",
+    "android/gradle",
+    "android/build.gradle",
+    "android/gradlew",
+    "android/gradlew.bat",
+    "ios/RNTapdaq.xcodeproj",
+    "ios/RNTapdaq.xcworkspace",
+    "ios/RNTapdaq.h",
+    "ios/RNTapdaq.m",
+    "ios/RNPromise.h",
+    "ios/RNPromise.m",
+    "ios/RNTapdaqSharedController.h",
+    "ios/RNTapdaqSharedController.m",
+    "ios/RNTapdaqMediatedNativeAdManager.h",
+    "ios/RNTapdaqMediatedNativeAdManager.m",
+    "ios/RNTapdaqMediatedNativeAdView.h",
+    "ios/RNTapdaqMediatedNativeAdView.m",
+    "react-native-tapdaq.podspec"
+  ]
+}

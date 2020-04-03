@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)presentDebugViewController;
 
-- (void)loadBannerForPlacementTag:(NSString *)placementTag;
+- (void)loadBannerForPlacementTag:(NSString *)placementTag withPromise:(RNPromise *)promise;
 - (void)showBanner:(NSString *)placement withPromise:(RNPromise *)promise;
 
 - (BOOL)isInterstitialReadyForPlacementTag:(NSString *)placementTag;

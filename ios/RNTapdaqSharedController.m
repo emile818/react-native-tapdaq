@@ -122,8 +122,9 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 - (void)presentDebugViewController {
     [[Tapdaq sharedSession] presentDebugViewController];
 }
-- (void)loadBannerForPlacementTag:(NSString *)placementTag {
-    [[Tapdaq sharedSession] loadBannerForPlacementTag:placementTag withSize:TDMBannerSizeStandard delegate:self];
+- (void)loadBannerForPlacementTag:(NSString *)placementTag withPromise:(RNPromise *)promise {
+    _adDisplayPromise = promise;
+    [[Tapdaq sharedSession] loadBannerForPlacementTag:placementTag withSize:TDMBannerStandard delegate:self];
 }
 
 

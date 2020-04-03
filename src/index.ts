@@ -65,6 +65,9 @@ class RNTapdaq {
   public showInterstitial = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.showInterstitial(placementTag)
   }
+  public loadBannerForPlacementTag = (placementTag: string): Promise<boolean> => {
+    return this.nativeModule.loadBannerForPlacementTag(placementTag)
+  }
 
   public isRewardedVideoReady = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.isRewardedVideoReady(placementTag)

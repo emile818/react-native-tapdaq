@@ -118,6 +118,10 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 - (void)presentDebugViewController {
     [[Tapdaq sharedSession] presentDebugViewController];
 }
+- (void)loadBannerForPlacementTag:(NSString *)placementTag {
+    [[Tapdaq sharedSession] loadBannerForPlacementTag:placementTag withSize:TDMBannerSizeStandard delegate:self];
+}
+
 
 - (BOOL)isInterstitialReadyForPlacementTag:(NSString *)placementTag {
     return [[Tapdaq sharedSession] isInterstitialReadyForPlacementTag:placementTag];

@@ -92,11 +92,25 @@ RCT_EXPORT_METHOD(loadInterstitial:(NSString *)placement
     [[RNTapdaqSharedController sharedController] loadInterstitial:placement withPromise:promise];
 }
 
+RCT_EXPORT_METHOD(loadBannerForPlacementTag:(NSString *)placement
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+    RNPromise *promise = [[RNPromise alloc] initWithResolver:resolve andRejector:reject];
+    [[RNTapdaqSharedController sharedController] loadBannerForPlacementTag:placement withPromise:promise];
+}
+
 RCT_EXPORT_METHOD(showInterstitial:(NSString *)placement
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject) {
     RNPromise *promise = [[RNPromise alloc] initWithResolver:resolve andRejector:reject];
     [[RNTapdaqSharedController sharedController] showInterstitial:placement withPromise:promise];
+}
+
+RCT_EXPORT_METHOD(showBanner:(NSString *)placement
+                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+    RNPromise *promise = [[RNPromise alloc] initWithResolver:resolve andRejector:reject];
+    [[RNTapdaqSharedController sharedController] showBanner:placement withPromise:promise];
 }
 
 RCT_EXPORT_METHOD(isRewardedVideoReady:(NSString *)placement

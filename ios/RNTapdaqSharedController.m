@@ -100,6 +100,10 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
     _adDisplayPromise = promise;
     [[Tapdaq sharedSession] showInterstitialForPlacementTag:placement];
 }
+- (void)showBanner:(NSString *)placement withPromise:(RNPromise *)promise{
+   _adDisplayPromise = promise;
+    [[Tapdaq sharedSession] showInterstitialForPlacementTag:placement];
+}
 
 - (void)loadRewardedVideo:(NSString *)placement withPromise:(RNPromise *)promise {
     _adLoadPromise = promise;

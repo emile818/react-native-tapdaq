@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.license      = package["license"]
   s.authors      = { "GieMik8" => "giemik8@email.com" }
   s.platforms    = { :ios => "9.0" }
-  s.source       = { :git => "https://github.com/GieMik8/react-native-tapdaq.git", :tag => "#{package["version"]}" }
+  s.source       = { :git => "https://github.com/emile818/react-native-tapdaq.git", :tag => "#{package["version"]}" }
 
   s.source_files = "ios/**/*.{h,m,swift}"
   s.requires_arc = true

@@ -68,9 +68,7 @@ class RNTapdaq {
   public loadBannerForPlacementTag = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadBannerForPlacementTag(placementTag)
   }
-  public showBanner = (placementTag: string): Promise<boolean> => {
-    return this.nativeModule.showBanner(placementTag)
-  }
+
 
   public isRewardedVideoReady = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.isRewardedVideoReady(placementTag)

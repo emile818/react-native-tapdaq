@@ -100,10 +100,11 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
     _adDisplayPromise = promise;
     [[Tapdaq sharedSession] showInterstitialForPlacementTag:placement];
 }
-- (void)showBanner:(NSString *)placement withPromise:(RNPromise *)promise{
-   _adDisplayPromise = promise;
-    [[Tapdaq sharedSession] showInterstitialForPlacementTag:placement];
+- (void)loadBannerForPlacementTag:(NSString *)placementTag withPromise:(RNPromise *)promise {
+    _adDisplayPromise = promise;
+    [[Tapdaq sharedSession] loadBannerForPlacementTag:placementTag withSize:TDMBannerStandard delegate:self];
 }
+
 
 - (void)loadRewardedVideo:(NSString *)placement withPromise:(RNPromise *)promise {
     _adLoadPromise = promise;
@@ -122,10 +123,7 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 - (void)presentDebugViewController {
     [[Tapdaq sharedSession] presentDebugViewController];
 }
-- (void)loadBannerForPlacementTag:(NSString *)placementTag withPromise:(RNPromise *)promise {
-    _adDisplayPromise = promise;
-    [[Tapdaq sharedSession] loadBannerForPlacementTag:placementTag withSize:TDMBannerStandard delegate:self];
-}
+
 
 
 - (BOOL)isInterstitialReadyForPlacementTag:(NSString *)placementTag {

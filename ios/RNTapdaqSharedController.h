@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showInterstitial:(NSString *)placement withPromise:(RNPromise *)promise;
 
+- (void)loadBannerForPlacementTag:(NSString *)placementTag withPromise:(RNPromise *)promise;
+
 - (void)loadRewardedVideo:(NSString *)placement withPromise:(RNPromise *)promise;
 
 - (void)showRewardedVideo:(NSString *)placement promise:(RNPromise *)promise;
@@ -65,8 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)presentDebugViewController;
 
-- (void)loadBannerForPlacementTag:(NSString *)placementTag withPromise:(RNPromise *)promise;
-- (void)showBanner:(NSString *)placement withPromise:(RNPromise *)promise;
+
 
 - (BOOL)isInterstitialReadyForPlacementTag:(NSString *)placementTag;
 

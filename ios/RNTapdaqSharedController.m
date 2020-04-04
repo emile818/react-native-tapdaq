@@ -164,6 +164,26 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 
 - (void)didLoadAdRequest:(TDAdRequest *)adRequest {
     [self tapDelegate:@"Ad did load"];
+    if ([adRequest isKindOfClass:[TDBannerAdRequest class]]) {
+        UIView* bannerView = [(TDBannerAdRequest *)adRequest bannerView];
+        // Place it at the bottom
+        [bannerView setFrame:CGRectMake(
+            (self.view.frame.size.width-bannerView.frame.size.width)/2,
+            self.view.frame.size.height-bannerView.frame.size.height,
+            bannerView.frame.size.width,
+            bannerView.frame.size.height
+        )];
+
+
+        bannerView.frame= CGRectMake(bannerView.frame.origin.x,
+                               bannerView.frame.origin.y-100,
+                               bannerView.frame.size.width,
+                               bannerView.frame.size.height);
+
+
+        [[[UIApplication sharedApplication] delegate].window.rootViewController.view addSubview:bannerView];
+
+    }else
     if (adRequest.placement.adUnit == TDMediatedNativeAdViewTypeUnknown) {
         [self informNativeDelegate:adRequest];
         return;

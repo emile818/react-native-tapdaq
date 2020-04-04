@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showInterstitial:(NSString *)placement withPromise:(RNPromise *)promise;
 
-- (void)loadBannerForPlacementTag:(NSString *)placementTag withPromise:(RNPromise *)promise;
+- (void)loadBannerForPlacementTag:(NSString *)placement withPromise:(RNPromise *)promise;
 
 - (void)loadRewardedVideo:(NSString *)placement withPromise:(RNPromise *)promise;
 

@@ -1,6 +1,6 @@
 {
   "name": "react-native-tapdaq",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Tapdaq bridge in React Native",
   "main": "dist/index.ts",
   "scripts": {

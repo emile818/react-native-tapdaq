@@ -173,10 +173,7 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
         )];
 
 
-        bannerView.frame= CGRectMake(bannerView.frame.origin.x,
-                               bannerView.frame.origin.y-100,
-                               bannerView.frame.size.width,
-                               bannerView.frame.size.height);
+        //bannerView.frame= CGRectMake(bannerView.frame.origin.x,bannerView.frame.origin.y-100, bannerView.frame.size.width,bannerView.frame.size.height);
 
 
         [[[UIApplication sharedApplication] delegate].window.rootViewController.view addSubview:bannerView];

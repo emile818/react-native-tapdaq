@@ -100,6 +100,7 @@ RCT_EXPORT_METHOD(showInterstitial:(NSString *)placement
     RNPromise *promise = [[RNPromise alloc] initWithResolver:resolve andRejector:reject];
     [[RNTapdaqSharedController sharedController] showInterstitial:placement withPromise:promise];
 }
+
 RCT_EXPORT_METHOD(loadBannerForPlacementTag:(NSString *)placement
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)  {

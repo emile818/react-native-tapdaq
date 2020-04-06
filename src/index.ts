@@ -24,10 +24,27 @@ class RNTapdaq {
   }
 
   public initialize = (applicationId: string, clientKey: string, config?: TapdaqConfig): Promise<boolean> => {
-    if (config) {
-      return this.nativeModule.initializeWithConfig(applicationId, clientKey, config)
-    }
-    return this.nativeModule.initialize(applicationId, clientKey)
+
+
+    return new Promise((resolve, reject) => {
+
+      if (config) {
+        this.nativeModule.initializeWithConfig(applicationId, clientKey, config)
+      }else{
+        this.nativeModule.initialize(applicationId, clientKey)
+      }
+      setTimeout(async () => {
+        const isInitialized = await this.isInitialized()
+        if(isInitialized){
+          resolve(true);
+        }else{
+          reject(false)
+        }
+      }, 2000);
+
+    });
+
+
   }
 
   public isInitialized = (): Promise<boolean> => {
@@ -78,7 +95,6 @@ class RNTapdaq {
       })
     });
 
-
   }
   public loadInterstitial = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadInterstitial(placementTag)
@@ -88,6 +104,20 @@ class RNTapdaq {
     return this.nativeModule.showInterstitial(placementTag)
   }
 
+  public loadAndShowBanner = (placementTag: string): Promise<boolean> => {
+
+    return new Promise((resolve, reject) => {
+      this.loadBannerForPlacementTag(placementTag).then((status,error) => {
+
+        if(status){
+          resolve(status);
+        }else{
+          reject(false)
+        }
+      })
+    });
+
+  }
   public loadBannerForPlacementTag = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadBannerForPlacementTag(placementTag)
   }
@@ -95,6 +125,26 @@ class RNTapdaq {
 
   public isRewardedVideoReady = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.isRewardedVideoReady(placementTag)
+  }
+
+  public loadAndShowRewarded = (placementTag: string): Promise<boolean> => {
+
+    return new Promise((resolve, reject) => {
+      this.loadRewardedVideo(placementTag).then((status,error) => {
+        if(status){
+          this.showRewardedVideo(placementTag).then((status,error)=>{
+            if(status){
+              resolve(status);
+            }else{
+              reject(false)
+            }
+          })
+        }else{
+          reject(false)
+        }
+      })
+    });
+
   }
 
   public loadRewardedVideo = (placementTag: string): Promise<boolean> => {

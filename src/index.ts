@@ -58,6 +58,28 @@ class RNTapdaq {
     return this.nativeModule.isInterstitialReady(placementTag)
   }
 
+
+  public loadAndShowInterstitial = (placementTag: string): Promise<boolean> => {
+
+    return new Promise((resolve, reject) => {
+      this.loadInterstitial(placementTag).then((status,error) => {
+        if(status){
+          this.showInterstitial(placementTag).then((status,error)=>{
+
+            if(status){
+              resolve(status);
+            }else{
+              reject(false)
+            }
+          })
+        }else{
+          reject(false)
+        }
+      })
+    });
+
+
+  }
   public loadInterstitial = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadInterstitial(placementTag)
   }
@@ -65,6 +87,7 @@ class RNTapdaq {
   public showInterstitial = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.showInterstitial(placementTag)
   }
+
   public loadBannerForPlacementTag = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadBannerForPlacementTag(placementTag)
   }

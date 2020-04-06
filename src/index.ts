@@ -122,6 +122,10 @@ class RNTapdaq {
     return this.nativeModule.loadBannerForPlacementTag(placementTag)
   }
 
+  public loadBannerForPlacementTagSize = (placementTag: string,type:number,x:number,y:number,width:number,height:number): Promise<boolean> => {
+    return this.nativeModule.loadBannerForPlacementTagSize(placementTag,type,x,y,width,height)
+  }
+
 
   public isRewardedVideoReady = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.isRewardedVideoReady(placementTag)

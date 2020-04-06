@@ -105,10 +105,24 @@ RCT_EXPORT_METHOD(loadBannerForPlacementTag:(NSString *)placement
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)  {
     RNPromise *promise = [[RNPromise alloc] initWithResolver:resolve andRejector:reject];
+    [[RNTapdaqSharedController sharedController] setType:0];
     [[RNTapdaqSharedController sharedController] loadBannerForPlacementTag:placement withPromise:promise];
 }
 
+RCT_EXPORT_METHOD(loadBannerForPlacementTagSize:(NSString *)placement type:(int)type x:(int) x y:(int) y width:(int) width height:(int) height
+                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)  {
+    RNPromise *promise = [[RNPromise alloc] initWithResolver:resolve andRejector:reject];
 
+    [[RNTapdaqSharedController sharedController] setType:type];
+    [[RNTapdaqSharedController sharedController] setWidth:width];
+    [[RNTapdaqSharedController sharedController] setHeight:height];
+    [[RNTapdaqSharedController sharedController] setXPosition:x];
+    [[RNTapdaqSharedController sharedController] setYPosition:y];
+    [[RNTapdaqSharedController sharedController] loadBannerForPlacementTag:placement withPromise:promise];
+}
+
+// RCT_EXPORT_METHOD(showMessage:(NSString *)message color:(UIColor *)color backgroundColor:(UIColor *)backgroundColor)
 RCT_EXPORT_METHOD(isRewardedVideoReady:(NSString *)placement
                   resolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject) {

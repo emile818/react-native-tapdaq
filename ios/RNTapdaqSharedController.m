@@ -102,7 +102,33 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 }
 - (void)loadBannerForPlacementTag:(NSString *)placement withPromise:(RNPromise *)promise {
     _adDisplayPromise = promise;
-    [[Tapdaq sharedSession] loadBannerForPlacementTag:placement withSize:TDMBannerStandard delegate:self];
+
+    /*
+     TDMBannerStandard,  0
+    TDMBannerLarge, 1
+    TDMBannerMedium, 2
+    TDMBannerFull, 3
+    TDMBannerLeaderboard, 4
+    TDMBannerSmart, 5
+    TDMBannerCustom 6
+     */
+    if(_type == 6){
+          [[Tapdaq sharedSession] loadBannerForPlacementTag:placement targetSize:CGSizeMake(_width, _height) delegate:self];
+    }else if(_type == 5){
+          [[Tapdaq sharedSession] loadBannerForPlacementTag:placement withSize:TDMBannerSmart delegate:self];
+    }else if(_type == 4){
+          [[Tapdaq sharedSession] loadBannerForPlacementTag:placement withSize:TDMBannerLeaderboard delegate:self];
+    }else if(_type == 3){
+          [[Tapdaq sharedSession] loadBannerForPlacementTag:placement withSize:TDMBannerFull delegate:self];
+    }else if(_type == 2){
+          [[Tapdaq sharedSession] loadBannerForPlacementTag:placement withSize:TDMBannerMedium delegate:self];
+    }else if(_type == 1){
+          [[Tapdaq sharedSession] loadBannerForPlacementTag:placement withSize:TDMBannerLarge delegate:self];
+    }else{
+          [[Tapdaq sharedSession] loadBannerForPlacementTag:placement withSize:TDMBannerStandard delegate:self];
+    }
+
+
 }
 
 
@@ -172,6 +198,11 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
             bannerView.frame.size.height
         )];
 
+
+
+        if(_xPosition>-1){
+          bannerView.frame= CGRectMake(_xPosition,_yPosition, _width,_height);
+        }
 
         //bannerView.frame= CGRectMake(bannerView.frame.origin.x,bannerView.frame.origin.y-100, bannerView.frame.size.width,bannerView.frame.size.height);
 

@@ -36,6 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) RNPromise *initializationPromise;
 @property (strong, nonatomic) RNPromise *adLoadPromise;
 @property (strong, nonatomic) RNPromise *adDisplayPromise;
+@property  int type;
+@property int xPosition;
+@property int yPosition;
+@property int width;
+@property int height;
 @property (strong, nonatomic) id<RNTapdaqSharedControllerDelegate> delegate;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, id> *nativeDelegates;
 

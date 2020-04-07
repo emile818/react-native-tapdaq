@@ -25,22 +25,26 @@ class RNTapdaq {
 
   public initialize = (applicationId: string, clientKey: string, config?: TapdaqConfig): Promise<boolean> => {
 
-
     return new Promise((resolve, reject) => {
 
+      let isInitialized = {}
       if (config) {
-        this.nativeModule.initializeWithConfig(applicationId, clientKey, config)
+        isInitialized = this.nativeModule.initializeWithConfig(applicationId, clientKey, config).then((status,error)=>{
+          if(status){
+            resolve(status);
+          }else{
+            reject(false)
+          }
+        })
       }else{
-        this.nativeModule.initialize(applicationId, clientKey)
+        isInitialized = this.nativeModule.initialize(applicationId, clientKey).then((status,error)=>{
+          if(status){
+            resolve(status);
+          }else{
+            reject(false)
+          }
+        })
       }
-      setTimeout(async () => {
-        const isInitialized = await this.isInitialized()
-        if(isInitialized){
-          resolve(true);
-        }else{
-          reject(false)
-        }
-      }, 2000);
 
     });
 
@@ -122,7 +126,9 @@ class RNTapdaq {
     return this.nativeModule.loadBannerForPlacementTag(placementTag)
   }
 
+  // (NSString *)placement type:(NSNumber*)type x:(NSNumber*) x y:(NSNumber*) y width:(NSNumber*) width height:(NSNumber*) height
   public loadBannerForPlacementTagSize = (placementTag: string,type:number,x:number,y:number,width:number,height:number): Promise<boolean> => {
+
     return this.nativeModule.loadBannerForPlacementTagSize(placementTag,type,x,y,width,height)
   }
 

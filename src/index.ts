@@ -130,8 +130,25 @@ class RNTapdaq {
     return this.nativeModule.hideBanner()
   }
 
-  public loadBannerForPlacementTagSize = (placementTag: string,type:number,x:number,y:number,width:number,height:number): Promise<boolean> => {
-    return this.nativeModule.loadBannerForPlacementTagSize(placementTag,type,x,y,width,height)
+  public loadBannerForPlacementTagSize = (placementTag: string,type:string,x:number,y:number,width:number,height:number): Promise<boolean> => {
+
+    let newtype = 0;
+    if(type == "TDMBannerLarge"){
+      newtype = 1
+    }else if(type == "TDMBannerMedium"){
+      newtype = 2
+    }else if(type == "TDMBannerFull"){
+      newtype = 3
+    }else if(type == "TDMBannerLeaderboard"){
+      newtype = 4
+    }else if(type == "TDMBannerSmart"){
+      newtype = 5
+    }
+    else if(type == "TDMBannerCustom"){
+      newtype = 6
+    }
+
+    return this.nativeModule.loadBannerForPlacementTagSize(placementTag,newtype,x,y,width,height)
   }
 
 

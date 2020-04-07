@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property int yPosition;
 @property int width;
 @property int height;
+@property Boolean isBannerShowed;
 @property (strong, nonatomic) id<RNTapdaqSharedControllerDelegate> delegate;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, id> *nativeDelegates;
 
@@ -71,6 +72,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)informNativeDelegate:(TDAdRequest *)adRequest error:(TDError *)error;
 
 - (void)presentDebugViewController;
+
+-(void)hideBanner;
 
 
 

@@ -101,11 +101,22 @@ RCT_EXPORT_METHOD(showInterstitial:(NSString *)placement
     [[RNTapdaqSharedController sharedController] showInterstitial:placement withPromise:promise];
 }
 
+
+
+RCT_EXPORT_METHOD(hideBanner:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+    [[RNTapdaqSharedController sharedController] hideBanner];
+    resolve(@(YES));
+}
+
+
+
 RCT_EXPORT_METHOD(loadBannerForPlacementTag:(NSString *)placement
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)  {
     RNPromise *promise = [[RNPromise alloc] initWithResolver:resolve andRejector:reject];
     [[RNTapdaqSharedController sharedController] setType:0];
+    [[RNTapdaqSharedController sharedController] setXPosition:-1];
     [[RNTapdaqSharedController sharedController] loadBannerForPlacementTag:placement withPromise:promise];
 }
 

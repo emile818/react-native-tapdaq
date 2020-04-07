@@ -126,9 +126,11 @@ class RNTapdaq {
     return this.nativeModule.loadBannerForPlacementTag(placementTag)
   }
 
-  // (NSString *)placement type:(NSNumber*)type x:(NSNumber*) x y:(NSNumber*) y width:(NSNumber*) width height:(NSNumber*) height
-  public loadBannerForPlacementTagSize = (placementTag: string,type:number,x:number,y:number,width:number,height:number): Promise<boolean> => {
+  public hideBanner = (): Promise<boolean> => {
+    return this.nativeModule.hideBanner()
+  }
 
+  public loadBannerForPlacementTagSize = (placementTag: string,type:number,x:number,y:number,width:number,height:number): Promise<boolean> => {
     return this.nativeModule.loadBannerForPlacementTagSize(placementTag,type,x,y,width,height)
   }
 

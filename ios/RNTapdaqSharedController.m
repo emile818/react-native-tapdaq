@@ -7,7 +7,7 @@
 //
 
 #import "RNTapdaqSharedController.h"
-
+#define MY_BANNER_TAG 71818
 @interface RNTapdaqSharedController ()
 
 @end
@@ -99,6 +99,22 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 - (void)showInterstitial:(NSString *)placement withPromise:(RNPromise *)promise {
     _adDisplayPromise = promise;
     [[Tapdaq sharedSession] showInterstitialForPlacementTag:placement];
+}
+
+-(void)hideBanner{
+    NSLog(@"hideBanner");
+
+    if(_isBannerShowed){
+
+        UIView *removeView  =  [[[UIApplication sharedApplication] delegate].window.rootViewController.view viewWithTag:MY_BANNER_TAG];
+        if(removeView != nil){
+            [removeView removeFromSuperview];
+        }
+
+        _isBannerShowed = false;
+
+
+    }
 }
 - (void)loadBannerForPlacementTag:(NSString *)placement withPromise:(RNPromise *)promise {
     _adDisplayPromise = promise;
@@ -206,7 +222,9 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 
         //bannerView.frame= CGRectMake(bannerView.frame.origin.x,bannerView.frame.origin.y-100, bannerView.frame.size.width,bannerView.frame.size.height);
 
+        bannerView.tag=MY_BANNER_TAG;
 
+        _isBannerShowed = true;
         [[[UIApplication sharedApplication] delegate].window.rootViewController.view addSubview:bannerView];
 
     }else

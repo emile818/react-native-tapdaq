@@ -25,6 +25,9 @@ RCT_EXPORT_MODULE()
     if (self) {
         _eventName = @"tapdaq";
         _hasListeners = NO;
+        _keyUserSubjectToGDPR = @"userSubjectToGDPR";
+        _keyConsentGiven = @"consentGiven";
+        _keyIsAgeRestrictedUser = @"isAgeRestrictedUser";
         [[RNTapdaqSharedController sharedController] setDelegate:self];
     }
     return self;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { EmitterSubscription, NativeEventEmitter, NativeModules } from 'react-native'
-const version = 1.0.22
 const tapdaqEventEmitter = new NativeEventEmitter(NativeModules.RNTapdaq)
+const version = '1.0.23'
 
 export interface TapdaqConfig {
   userSubjectToGDPR?: boolean
@@ -23,16 +23,13 @@ class RNTapdaq {
     return NativeModules.RNTapdaq
   }
 
-  public js_version () 
-  { 
-      return version;
+  public js_version() {
+    return version
   }
 
-  public ios_version () 
-  { 
-     return this.nativeModule.versionIOS();
+  public ios_version() {
+    return this.nativeModule.versionIOS()
   }
-
 
   public initialize = (applicationId: string, clientKey: string, config?: TapdaqConfig): Promise<boolean> => {
     return new Promise((resolve, reject) => {

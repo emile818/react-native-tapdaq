@@ -114,7 +114,7 @@ RCT_EXPORT_METHOD(hideBanner:(RCTPromiseResolveBlock)resolve
 
 
 
-RCT_EXPORT_METHOD(hideBanner:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(versionIOS:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject) {
     [[RNTapdaqSharedController sharedController] versionIOS];
     resolve(@(YES));

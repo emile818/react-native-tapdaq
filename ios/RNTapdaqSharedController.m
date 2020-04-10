@@ -7,7 +7,7 @@
 //
 
 #import "RNTapdaqSharedController.h"
-#define MY_BANNER_TAG "1.0.18"
+#define MY_BANNER_TAG "1.0.19"
 @interface RNTapdaqSharedController ()
 
 @end

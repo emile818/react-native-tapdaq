@@ -7,7 +7,7 @@
 //
 
 #import "RNTapdaqSharedController.h"
-#define MY_BANNER_TAG "1.0.16"
+#define MY_BANNER_TAG "1.0.18"
 @interface RNTapdaqSharedController ()
 
 @end
@@ -104,17 +104,17 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 -(void)hideBanner{
     NSLog(@"hideBanner");
 
-    if(_isBannerShowed){
+   // if(_isBannerShowed){
 
         UIView *removeView  =  [[[UIApplication sharedApplication] delegate].window.rootViewController.view viewWithTag:MY_BANNER_TAG];
         if(removeView != nil){
             [removeView removeFromSuperview];
         }
 
-        _isBannerShowed = false;
+        //_isBannerShowed = false;
 
 
-    }
+   // }
 }
 - (void)loadBannerForPlacementTag:(NSString *)placement withPromise:(RNPromise *)promise {
     _adDisplayPromise = promise;

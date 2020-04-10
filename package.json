@@ -1,6 +1,6 @@
 {
   "name": "react-native-tapdaq",
-  "version": "1.0.16",
+  "version": "1.0.18",
   "description": "Tapdaq bridge in React Native",
   "main": "dist/index.ts",
   "scripts": {
@@ -8,7 +8,7 @@
     "watch": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "build": "npm run lint && npm run format && npm run build:tsc && npm pack"
+    "build": "npm run format && npm run build:tsc && npm pack"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "react-native": ">=0.59.0-rc.0 <1.0.x"
   },
   "devDependencies": {
+    "@types/node": "^13.11.1",
     "@types/react": "^16.9.17",
     "@types/react-native": "^0.60.27",
     "prettier": "^1.19.1",

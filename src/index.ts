@@ -24,31 +24,30 @@ class RNTapdaq {
   }
 
   public initialize = (applicationId: string, clientKey: string, config?: TapdaqConfig): Promise<boolean> => {
-
     return new Promise((resolve, reject) => {
-
       let isInitialized = {}
       if (config) {
-        isInitialized = this.nativeModule.initializeWithConfig(applicationId, clientKey, config).then((status,error)=>{
-          if(status){
-            resolve(status);
-          }else{
-            reject(false)
-          }
-        })
-      }else{
-        isInitialized = this.nativeModule.initialize(applicationId, clientKey).then((status,error)=>{
-          if(status){
-            resolve(status);
-          }else{
-            reject(false)
-          }
-        })
+        isInitialized = this.nativeModule
+          .initializeWithConfig(applicationId, clientKey, config)
+          .then((status: boolean | PromiseLike<boolean> | undefined, error: any) => {
+            if (status) {
+              resolve(status)
+            } else {
+              reject(false)
+            }
+          })
+      } else {
+        isInitialized = this.nativeModule
+          .initialize(applicationId, clientKey)
+          .then((status: boolean | PromiseLike<boolean> | undefined, error: any) => {
+            if (status) {
+              resolve(status)
+            } else {
+              reject(false)
+            }
+          })
       }
-
-    });
-
-
+    })
   }
 
   public isInitialized = (): Promise<boolean> => {
@@ -79,26 +78,24 @@ class RNTapdaq {
     return this.nativeModule.isInterstitialReady(placementTag)
   }
 
-
   public loadAndShowInterstitial = (placementTag: string): Promise<boolean> => {
-
     return new Promise((resolve, reject) => {
-      this.loadInterstitial(placementTag).then((status,error) => {
-        if(status){
-          this.showInterstitial(placementTag).then((status,error)=>{
-
-            if(status){
-              resolve(status);
-            }else{
+      // @ts-ignore
+      this.loadInterstitial(placementTag).then((status, error) => {
+        if (status) {
+          // @ts-ignore
+          this.showInterstitial(placementTag).then((status, error) => {
+            if (status) {
+              resolve(status)
+            } else {
               reject(false)
             }
           })
-        }else{
+        } else {
           reject(false)
         }
       })
-    });
-
+    })
   }
   public loadInterstitial = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadInterstitial(placementTag)
@@ -109,18 +106,16 @@ class RNTapdaq {
   }
 
   public loadAndShowBanner = (placementTag: string): Promise<boolean> => {
-
     return new Promise((resolve, reject) => {
-      this.loadBannerForPlacementTag(placementTag).then((status,error) => {
-
-        if(status){
-          resolve(status);
-        }else{
+      // @ts-ignore
+      this.loadBannerForPlacementTag(placementTag).then((status, error) => {
+        if (status) {
+          resolve(status)
+        } else {
           reject(false)
         }
       })
-    });
-
+    })
   }
   public loadBannerForPlacementTag = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadBannerForPlacementTag(placementTag)
@@ -130,50 +125,54 @@ class RNTapdaq {
     return this.nativeModule.hideBanner()
   }
 
-  public loadBannerForPlacementTagSize = (placementTag: string,type:string,x:number,y:number,width:number,height:number): Promise<boolean> => {
-
-    let newtype = 0;
-    if(type == "TDMBannerLarge"){
+  public loadBannerForPlacementTagSize = (
+    placementTag: string,
+    type: string,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+  ): Promise<boolean> => {
+    let newtype = 0
+    if (type == 'TDMBannerLarge') {
       newtype = 1
-    }else if(type == "TDMBannerMedium"){
+    } else if (type == 'TDMBannerMedium') {
       newtype = 2
-    }else if(type == "TDMBannerFull"){
+    } else if (type == 'TDMBannerFull') {
       newtype = 3
-    }else if(type == "TDMBannerLeaderboard"){
+    } else if (type == 'TDMBannerLeaderboard') {
       newtype = 4
-    }else if(type == "TDMBannerSmart"){
+    } else if (type == 'TDMBannerSmart') {
       newtype = 5
-    }
-    else if(type == "TDMBannerCustom"){
+    } else if (type == 'TDMBannerCustom') {
       newtype = 6
     }
 
-    return this.nativeModule.loadBannerForPlacementTagSize(placementTag,newtype,x,y,width,height)
+    return this.nativeModule.loadBannerForPlacementTagSize(placementTag, newtype, x, y, width, height)
   }
-
 
   public isRewardedVideoReady = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.isRewardedVideoReady(placementTag)
   }
 
   public loadAndShowRewarded = (placementTag: string): Promise<boolean> => {
-
     return new Promise((resolve, reject) => {
-      this.loadRewardedVideo(placementTag).then((status,error) => {
-        if(status){
-          this.showRewardedVideo(placementTag).then((status,error)=>{
-            if(status){
-              resolve(status);
-            }else{
+      // @ts-ignore
+      this.loadRewardedVideo(placementTag).then((status, error) => {
+        if (status) {
+          // @ts-ignore
+          this.showRewardedVideo(placementTag).then((status, error) => {
+            if (status) {
+              resolve(status)
+            } else {
               reject(false)
             }
           })
-        }else{
+        } else {
           reject(false)
         }
       })
-    });
-
+    })
   }
 
   public loadRewardedVideo = (placementTag: string): Promise<boolean> => {

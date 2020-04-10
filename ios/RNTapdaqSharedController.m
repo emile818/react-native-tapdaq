@@ -7,7 +7,7 @@
 //
 
 #import "RNTapdaqSharedController.h"
-#define VERSION "1.0.23"
+#define VERSION "1.0.24"
 #define MY_BANNER_TAG 818818818
 
 @interface RNTapdaqSharedController ()
@@ -40,7 +40,7 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 }
 
 
-- (void)versionIOS {
+- (NSString*)versionIOS {
     return VERSION;
 }
 

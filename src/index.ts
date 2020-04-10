@@ -1,7 +1,7 @@
 import React from 'react'
 import { EmitterSubscription, NativeEventEmitter, NativeModules } from 'react-native'
 const tapdaqEventEmitter = new NativeEventEmitter(NativeModules.RNTapdaq)
-const version = '1.0.25'
+const version = '1.0.26'
 
 export interface TapdaqConfig {
   userSubjectToGDPR?: boolean

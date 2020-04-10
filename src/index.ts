@@ -1,6 +1,6 @@
 import React from 'react'
 import { EmitterSubscription, NativeEventEmitter, NativeModules } from 'react-native'
-
+//1.0.20
 const tapdaqEventEmitter = new NativeEventEmitter(NativeModules.RNTapdaq)
 
 export interface TapdaqConfig {

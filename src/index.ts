@@ -1,6 +1,6 @@
 import React from 'react'
 import { EmitterSubscription, NativeEventEmitter, NativeModules } from 'react-native'
-//1.0.20
+const version = 1.0.22
 const tapdaqEventEmitter = new NativeEventEmitter(NativeModules.RNTapdaq)
 
 export interface TapdaqConfig {
@@ -22,6 +22,17 @@ class RNTapdaq {
   get nativeModule() {
     return NativeModules.RNTapdaq
   }
+
+  public js_version () 
+  { 
+      return version;
+  }
+
+  public ios_version () 
+  { 
+     return this.nativeModule.versionIOS();
+  }
+
 
   public initialize = (applicationId: string, clientKey: string, config?: TapdaqConfig): Promise<boolean> => {
     return new Promise((resolve, reject) => {

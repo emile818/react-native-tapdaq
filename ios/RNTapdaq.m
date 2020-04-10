@@ -114,6 +114,14 @@ RCT_EXPORT_METHOD(hideBanner:(RCTPromiseResolveBlock)resolve
 
 
 
+RCT_EXPORT_METHOD(hideBanner:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+    [[RNTapdaqSharedController sharedController] versionIOS];
+    resolve(@(YES));
+}
+
+
+
 RCT_EXPORT_METHOD(loadBannerForPlacementTag:(NSString *)placement
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)  {

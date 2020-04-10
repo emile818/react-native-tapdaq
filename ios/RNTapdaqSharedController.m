@@ -7,7 +7,9 @@
 //
 
 #import "RNTapdaqSharedController.h"
-#define MY_BANNER_TAG "1.0.19"
+#define VERSION "1.0.22"
+#define MY_BANNER_TAG 818818818
+
 @interface RNTapdaqSharedController ()
 
 @end
@@ -35,6 +37,11 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Note: This view does not load
+}
+
+
+- (void)versionIOS {
+    return VERSION;
 }
 
 - (void)tapDelegate:(NSString *)message {

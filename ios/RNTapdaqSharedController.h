@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)hideBanner;
 
--(void)versionIOS;
+-(NSString*)versionIOS;
 
 
 - (BOOL)isInterstitialReadyForPlacementTag:(NSString *)placementTag;

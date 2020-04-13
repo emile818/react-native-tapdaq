@@ -15,6 +15,31 @@ Tapdaq bridge in React Native
 
 `RNTapdaq.loadInterstitial("default");`
 
+
+
+functions:
+
+Name        | Arguments                                                           | Description
+------------|-----------                                                          |----------------
+js_version     |                   | get the version of this dependencies
+initialize   | applicationId: string, clientKey: string, config?: TapdaqConfig  |initialize tapdaq
+isInitialized     |                   | test if tapdaq is is Initialized or not 
+openTestControls     |                   | open the test controls 
+setConsentGiven     |      value: boolean             | set Consent Given
+setIsAgeRestrictedUser     |    value: boolean               |setIsAgeRestrictedUser
+setUserSubjectToGDPR     |     value: boolean              | set User Subject To GDPR
+setUserId     |          id: string         | get the js version 
+loadAndShowInterstitial     |       placementTag: string             | load And Show Interstitial  banner
+loadInterstitial     |     placementTag: string              | load the Interstitial
+showInterstitial     |   placementTag: string                | show the Interstitial 
+loadAndShowBanner     |       placementTag: string            | load and show the banner 
+hideBanner     |                   | hide the banner
+loadBannerForPlacementTagSize     |   placementTag: string,type: string,x: number,y: number,width: number,height: number,  | load and show the banner for specific stype and properties
+loadAndShowRewarded     |      placementTag: string             | load And ShowRewarded banner 
+loadRewardedVideo     |      placementTag: string             | load the Rewarded Video 
+showRewardedVideo     |        placementTag: string           | show the Rewarded Video banner
+
+
 ```
 TapdaqConfig {
     userSubjectToGDPR?: boolean
@@ -26,27 +51,4 @@ TapdaqConfig {
 
 
 - For help contact emile@unicornlab.com
-
-
-functions:
-
-Name        | Arguments                                                           | Description
-------------|-----------                                                          |----------------
-js_version     |                   | get the js version 
-initialize   | applicationId: string, clientKey: string, config?: TapdaqConfig  |initialize tapdaq
-isInitialized     |                   | get the js version 
-openTestControls     |                   | get the js version 
-setConsentGiven     |                   | get the js version 
-setIsAgeRestrictedUser     |                   | get the js version 
-setUserSubjectToGDPR     |                   | get the js version 
-setUserId     |                   | get the js version 
-loadAndShowInterstitial     |       placementTag: string             | get the js version 
-loadInterstitial     |     placementTag: string              | get the js version 
-showInterstitial     |   placementTag: string                | get the js version 
-loadAndShowBanner     |       placementTag: string            | get the js version 
-hideBanner     |                   | get the js version 
-loadBannerForPlacementTagSize     |   placementTag: string,type: string,x: number,y: number,width: number,height: number,  | get the js version 
-loadAndShowRewarded     |      placementTag: string             | get the js version 
-loadRewardedVideo     |      placementTag: string             | get the js version 
-showRewardedVideo     |        placementTag: string           | get the js version 
 

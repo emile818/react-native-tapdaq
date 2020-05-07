@@ -1,25 +1,43 @@
 package com.rn.tapdaq;
 
+import android.os.Handler;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.tapdaq.sdk.STATUS;
+import com.tapdaq.sdk.TMBannerAdView;
 import com.tapdaq.sdk.Tapdaq;
 import com.tapdaq.sdk.TapdaqConfig;
+import com.tapdaq.sdk.*;
 import com.tapdaq.sdk.adnetworks.TDMediatedNativeAd;
 import com.tapdaq.sdk.common.TMAdError;
+import com.tapdaq.sdk.common.TMBannerAdSizes;
+import com.tapdaq.sdk.listeners.TMAdListener;
+
+
+import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
+
+
 
 public class RNTapdaqModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
     private String TAG = this.getName();
+
+    private String VERSION = "1.0.27";
+    private String MY_BANNER_TAG = "818818818";
+
+
 
     private static final String KEY_USER_SUBJECT_TO_GDPR = "userSubjectToGDPR";
     private static final String KEY_CONSENT_GIVEN = "consentGiven";
@@ -119,6 +137,58 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void  hideBanner(){
+
+
+        // get banner by tag and destory
+    }
+
+    @ReactMethod
+    public void loadAndShowInterstitial(String placement, final Promise promise) {
+        try {
+            final RNTapdaqModule self = this;
+            Tapdaq.getInstance().loadInterstitial(getCurrentActivity(), placement, new RNTapdaqAdListener(this, placement) {
+                @Override
+                public void didLoad() {
+                    super.didLoad();
+                    log("Interstitial loaded: " + this.mPlacement);
+                    if (this.getIsFulfilled()) {
+                        return;
+                    }
+                    this.setFulfilled(Boolean.TRUE);
+                    self.showInterstitial(this.mPlacement,promise);
+                    promise.resolve(Boolean.TRUE);
+                }
+
+                @Override
+                public void didLoad(TDMediatedNativeAd ad) {
+                    super.didLoad(ad);
+                    log("Ad " + this.mPlacement + " loaded");
+                    if (this.getIsFulfilled()) {
+                        return;
+                    }
+                    this.setFulfilled(Boolean.TRUE);
+                    promise.resolve(Boolean.TRUE);
+                }
+
+                @Override
+                public void didFailToLoad(TMAdError error) {
+                    super.didFailToLoad(error);
+                    log("Ad " + this.mPlacement + " did fail to load");
+                    if (this.getIsFulfilled()) {
+                        return;
+                    }
+                    this.setFulfilled(Boolean.TRUE);
+                    promise.reject(error.getErrorMessage());
+                }
+            });
+        } catch (Exception err) {
+            log(err.getMessage());
+            promise.reject(err.getMessage());
+        }
+    }
+
+    @ReactMethod
     public void loadInterstitial(String placement, final Promise promise) {
         try {
             Tapdaq.getInstance().loadInterstitial(getCurrentActivity(), placement, new RNTapdaqAdListener(this, placement) {
@@ -155,6 +225,124 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
                     promise.reject(error.getErrorMessage());
                 }
             });
+        } catch (Exception err) {
+            log(err.getMessage());
+            promise.reject(err.getMessage());
+        }
+    }
+
+
+
+    @ReactMethod
+    public void loadBannerForPlacementTagSize(String placement, int type,int x, int y, int width, int height,final Promise promise) {
+        try {
+
+            //TMBannerAdView ad = (TMBannerAdView) getCurrentActivity().findViewById(R.id.banner_ad);
+
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    //  try{
+
+                    ViewGroup layout = (ViewGroup) getReactApplicationContext().getCurrentActivity().findViewById(android.R.id.content);
+                    final TMBannerAdView ad = new TMBannerAdView(getReactApplicationContext()); // Create ad view
+                    //  ad.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    ad.setTag(MY_BANNER_TAG);
+
+                    layout.addView(ad);
+                    // Stuff that updates the UI
+
+
+                    Button b = new Button(getReactApplicationContext());
+                    b.setText("Button added dynamically!");
+                    b.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    //b.setId(MY_BUTTON);
+                    //b.setOnClickListener(getReactApplicationContext());
+                    //  layout.addView(b);
+
+
+
+                    //int bannerWidth = options.optInt(CDV_OPTS_BANNER_WIDTH);
+                    // int bannerHeight = options.optInt(CDV_OPTS_BANNER_HEIGHT);
+                    //   TDBanner.Load(getCurrentActivity(), "default", 99, 99, new TMAdListener());
+                    // Tapdaq.getInstance().
+
+                    ad.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.STANDARD, new TMAdListener());
+
+
+                    promise.resolve(Boolean.TRUE);
+
+
+                    //  }catch (Exception err) {
+                    //    log(err.getMessage());
+                    //     promise.reject(err.getMessage());
+                    //   }
+
+                }
+            });
+
+
+            promise.resolve(Boolean.TRUE);
+        } catch (Exception err) {
+            log(err.getMessage());
+            promise.reject(err.getMessage());
+        }
+    }
+    @ReactMethod
+    public void loadBannerForPlacementTag(String placement, final Promise promise) {
+        try {
+
+
+
+            //TMBannerAdView ad = (TMBannerAdView) getCurrentActivity().findViewById(R.id.banner_ad);
+
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+
+                  //  try{
+
+                        ViewGroup layout = (ViewGroup) getReactApplicationContext().getCurrentActivity().findViewById(android.R.id.content);
+                        final TMBannerAdView ad = new TMBannerAdView(getReactApplicationContext()); // Create ad view
+                      //  ad.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        ad.setTag(MY_BANNER_TAG);
+                        layout.addView(ad);
+                        // Stuff that updates the UI
+
+
+                        Button b = new Button(getReactApplicationContext());
+                        b.setText("Button added dynamically!");
+                        b.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        //b.setId(MY_BUTTON);
+                        //b.setOnClickListener(getReactApplicationContext());
+                      //  layout.addView(b);
+
+
+
+                        //int bannerWidth = options.optInt(CDV_OPTS_BANNER_WIDTH);
+                       // int bannerHeight = options.optInt(CDV_OPTS_BANNER_HEIGHT);
+                     //   TDBanner.Load(getCurrentActivity(), "default", 99, 99, new TMAdListener());
+                       // Tapdaq.getInstance().
+
+                           ad.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.STANDARD, new TMAdListener());
+
+
+                        promise.resolve(Boolean.TRUE);
+
+
+                  //  }catch (Exception err) {
+                    //    log(err.getMessage());
+                   //     promise.reject(err.getMessage());
+                 //   }
+
+                }
+            });
+
+
+            promise.resolve(Boolean.TRUE);
         } catch (Exception err) {
             log(err.getMessage());
             promise.reject(err.getMessage());
@@ -205,6 +393,52 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void loadAndShowRewarded(final String placement, final Promise promise) {
+        try {
+            Boolean ready = Tapdaq.getInstance().isRewardedVideoReady(getCurrentActivity(), placement);
+            if (ready) {
+                promise.resolve(Boolean.TRUE);
+                return;
+            }
+            final RNTapdaqModule self = this;
+            Tapdaq.getInstance().loadRewardedVideo(getCurrentActivity(), placement, new RNTapdaqAdListener(this, placement) {
+                @Override
+                public void didLoad() {
+                    super.didLoad();
+                    if (this.getIsFulfilled()) {
+                        return;
+                    }
+                    this.setFulfilled(Boolean.TRUE);
+                    self.showRewardedVideo(this.mPlacement,promise);
+                    promise.resolve(Boolean.TRUE);
+                }
+
+                @Override
+                public void didLoad(TDMediatedNativeAd ad) {
+                    super.didLoad(ad);
+                    if (this.getIsFulfilled()) {
+                        return;
+                    }
+                    this.setFulfilled(Boolean.TRUE);
+                    promise.resolve(Boolean.TRUE);
+                }
+
+                @Override
+                public void didFailToLoad(TMAdError error) {
+                    super.didFailToLoad(error);
+                    if (this.getIsFulfilled()) {
+                        return;
+                    }
+                    this.setFulfilled(Boolean.TRUE);
+                    promise.reject(error.getErrorMessage());
+                }
+            });
+        } catch (Exception err) {
+            log(err.getMessage());
+            promise.reject(err.getMessage());
+        }
+    }
     @ReactMethod
     public void loadRewardedVideo(final String placement, final Promise promise) {
         try {

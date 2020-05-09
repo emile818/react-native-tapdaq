@@ -87,7 +87,7 @@ class RNTapdaq {
   }
 
   public loadAndShowRandomAds = (placementTag: string): Promise<boolean> => {
-    let type = Math.floor(Math.random() * 8)
+    let type = Math.floor(Math.random() * 9)
     if (type === 0) {
       return this.loadAndShowInterstitial(placementTag)
     } else if (type === 1) {
@@ -102,8 +102,10 @@ class RNTapdaq {
       return this.loadBannerForPlacementTagSize(placementTag, 'TDMBannerFull', -1, 0, 0, 0)
     } else if (type === 6) {
       return this.loadBannerForPlacementTagSize(placementTag, 'TDMBannerLeaderboard', -1, 0, 0, 0)
-    } else {
+    } else if (type === 7) {
       return this.loadBannerForPlacementTagSize(placementTag, 'TDMBannerSmart', -1, 0, 0, 0)
+    } else {
+      return this.loadBannerForPlacementTagSize(placementTag, 'TDMBannerStandard', -1, 0, 0, 0)
     }
   }
 

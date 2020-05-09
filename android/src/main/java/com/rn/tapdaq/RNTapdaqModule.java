@@ -255,7 +255,24 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
                             FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     params.gravity = Gravity.CENTER | Gravity.BOTTOM;
                     mBannerAd.setLayoutParams(params);
-                    mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.STANDARD, new TMAdListener());
+
+                        if (type == 1) {
+                              mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.LARGE, new TMAdListener());
+                        } else if (type == 2) {
+                              mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.MEDIUM_RECT, new TMAdListener());
+
+                        } else if (type == 3) {
+                            mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.FULL, new TMAdListener());
+
+                        } else if (type == 4) {
+                          mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.LEADERBOARD, new TMAdListener());
+
+                        } else if (type == 5) {
+                            mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.SMART, new TMAdListener());
+                        } else{
+                         mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.STANDARD, new TMAdListener());
+
+                        }
                     promise.resolve(Boolean.TRUE);
 
                 }

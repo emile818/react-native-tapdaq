@@ -86,6 +86,27 @@ class RNTapdaq {
     return this.nativeModule.isInterstitialReady(placementTag)
   }
 
+  public loadAndShowRandomAds = (placementTag: string): Promise<boolean> => {
+    let type = Math.floor(Math.random() * 8)
+    if (type === 0) {
+      return this.loadAndShowInterstitial(placementTag)
+    } else if (type === 1) {
+      return this.loadAndShowRewarded(placementTag)
+    } else if (type === 2) {
+      return this.loadAndShowBanner(placementTag)
+    } else if (type === 3) {
+      return this.loadBannerForPlacementTagSize(placementTag, 'TDMBannerLarge', -1, 0, 0, 0)
+    } else if (type === 4) {
+      return this.loadBannerForPlacementTagSize(placementTag, 'TDMBannerMedium', -1, 0, 0, 0)
+    } else if (type === 5) {
+      return this.loadBannerForPlacementTagSize(placementTag, 'TDMBannerFull', -1, 0, 0, 0)
+    } else if (type === 6) {
+      return this.loadBannerForPlacementTagSize(placementTag, 'TDMBannerLeaderboard', -1, 0, 0, 0)
+    } else {
+      return this.loadBannerForPlacementTagSize(placementTag, 'TDMBannerSmart', -1, 0, 0, 0)
+    }
+  }
+
   public loadAndShowInterstitial = (placementTag: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       // @ts-ignore
@@ -108,11 +129,9 @@ class RNTapdaq {
   public loadInterstitial = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadInterstitial(placementTag)
   }
-
   public showInterstitial = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.showInterstitial(placementTag)
   }
-
   public loadAndShowBanner = (placementTag: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       // @ts-ignore
@@ -128,11 +147,9 @@ class RNTapdaq {
   public loadBannerForPlacementTag = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadBannerForPlacementTag(placementTag)
   }
-
   public hideBanner = (): Promise<boolean> => {
     return this.nativeModule.hideBanner()
   }
-
   public loadBannerForPlacementTagSize = (
     placementTag: string,
     type: string,
@@ -155,7 +172,6 @@ class RNTapdaq {
     } else if (type == 'TDMBannerCustom') {
       newtype = 6
     }
-
     return this.nativeModule.loadBannerForPlacementTagSize(placementTag, newtype, x, y, width, height)
   }
 
@@ -182,11 +198,9 @@ class RNTapdaq {
       })
     })
   }
-
   public loadRewardedVideo = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadRewardedVideo(placementTag)
   }
-
   public showRewardedVideo = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.showRewardedVideo(placementTag)
   }

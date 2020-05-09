@@ -2,8 +2,11 @@ package com.rn.tapdaq;
 
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -37,7 +40,7 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
     private String VERSION = "1.0.27";
     private String MY_BANNER_TAG = "818818818";
 
-
+    private TMBannerAdView mBannerAd;
 
     private static final String KEY_USER_SUBJECT_TO_GDPR = "userSubjectToGDPR";
     private static final String KEY_CONSENT_GIVEN = "consentGiven";
@@ -140,7 +143,10 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
     public void  hideBanner(){
 
 
-        // get banner by tag and destory
+        if(mBannerAd!=null){
+            // get banner by tag and destory
+            mBannerAd.destroy(getReactApplicationContext());
+        }
     }
 
     @ReactMethod
@@ -236,49 +242,21 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void loadBannerForPlacementTagSize(String placement, int type,int x, int y, int width, int height,final Promise promise) {
         try {
-
-            //TMBannerAdView ad = (TMBannerAdView) getCurrentActivity().findViewById(R.id.banner_ad);
-
             runOnUiThread(new Runnable() {
 
                 @Override
                 public void run() {
 
-                    //  try{
-
                     ViewGroup layout = (ViewGroup) getReactApplicationContext().getCurrentActivity().findViewById(android.R.id.content);
-                    final TMBannerAdView ad = new TMBannerAdView(getReactApplicationContext()); // Create ad view
-                    //  ad.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    ad.setTag(MY_BANNER_TAG);
-
-                    layout.addView(ad);
-                    // Stuff that updates the UI
-
-
-                    Button b = new Button(getReactApplicationContext());
-                    b.setText("Button added dynamically!");
-                    b.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    //b.setId(MY_BUTTON);
-                    //b.setOnClickListener(getReactApplicationContext());
-                    //  layout.addView(b);
-
-
-
-                    //int bannerWidth = options.optInt(CDV_OPTS_BANNER_WIDTH);
-                    // int bannerHeight = options.optInt(CDV_OPTS_BANNER_HEIGHT);
-                    //   TDBanner.Load(getCurrentActivity(), "default", 99, 99, new TMAdListener());
-                    // Tapdaq.getInstance().
-
-                    ad.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.STANDARD, new TMAdListener());
-
-
+                    mBannerAd = new TMBannerAdView(getReactApplicationContext()); // Create ad view
+                    mBannerAd.setTag(MY_BANNER_TAG);
+                    layout.addView(mBannerAd);
+                    FrameLayout.LayoutParams params = new
+                            FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params.gravity = Gravity.CENTER | Gravity.BOTTOM;
+                    mBannerAd.setLayoutParams(params);
+                    mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.STANDARD, new TMAdListener());
                     promise.resolve(Boolean.TRUE);
-
-
-                    //  }catch (Exception err) {
-                    //    log(err.getMessage());
-                    //     promise.reject(err.getMessage());
-                    //   }
 
                 }
             });
@@ -293,50 +271,20 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void loadBannerForPlacementTag(String placement, final Promise promise) {
         try {
-
-
-
-            //TMBannerAdView ad = (TMBannerAdView) getCurrentActivity().findViewById(R.id.banner_ad);
-
             runOnUiThread(new Runnable() {
 
                 @Override
                 public void run() {
-
-                  //  try{
-
                         ViewGroup layout = (ViewGroup) getReactApplicationContext().getCurrentActivity().findViewById(android.R.id.content);
-                        final TMBannerAdView ad = new TMBannerAdView(getReactApplicationContext()); // Create ad view
-                      //  ad.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                        ad.setTag(MY_BANNER_TAG);
-                        layout.addView(ad);
-                        // Stuff that updates the UI
-
-
-                        Button b = new Button(getReactApplicationContext());
-                        b.setText("Button added dynamically!");
-                        b.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                        //b.setId(MY_BUTTON);
-                        //b.setOnClickListener(getReactApplicationContext());
-                      //  layout.addView(b);
-
-
-
-                        //int bannerWidth = options.optInt(CDV_OPTS_BANNER_WIDTH);
-                       // int bannerHeight = options.optInt(CDV_OPTS_BANNER_HEIGHT);
-                     //   TDBanner.Load(getCurrentActivity(), "default", 99, 99, new TMAdListener());
-                       // Tapdaq.getInstance().
-
-                           ad.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.STANDARD, new TMAdListener());
-
-
-                        promise.resolve(Boolean.TRUE);
-
-
-                  //  }catch (Exception err) {
-                    //    log(err.getMessage());
-                   //     promise.reject(err.getMessage());
-                 //   }
+                        mBannerAd = new TMBannerAdView(getReactApplicationContext()); // Create ad view
+                    mBannerAd.setTag(MY_BANNER_TAG);
+                        layout.addView(mBannerAd);
+                    FrameLayout.LayoutParams params = new
+                            FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    params.gravity = Gravity.CENTER | Gravity.BOTTOM;
+                    mBannerAd.setLayoutParams(params);
+                    mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.STANDARD, new TMAdListener());
+                    promise.resolve(Boolean.TRUE);
 
                 }
             });

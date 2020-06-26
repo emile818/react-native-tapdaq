@@ -61,6 +61,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showRewardedVideo:(NSString *)placement promise:(RNPromise *)promise;
 
+- (void)loadAndShowStaticVideo:(NSString *)placement promise:(RNPromise *)promise;
+
 - (void)loadNativeAd:(NSString *)placement;
 
 - (void)tapDelegate:(NSString *)message;

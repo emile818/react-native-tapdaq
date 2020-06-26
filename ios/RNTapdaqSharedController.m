@@ -164,6 +164,10 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
   _adDisplayPromise = promise;
     [[Tapdaq sharedSession] showRewardedVideoForPlacementTag:placement];
 }
+- (void)loadAndShowStaticVideo:(NSString *)placement promise:(RNPromise *)promise{
+ _adDisplayPromise = promise;
+   [[Tapdaq sharedSession] loadVideoForPlacementTag:placement delegate:self];
+}
 
 - (void)loadNativeAd:(NSString *)placement {
     [[Tapdaq sharedSession] loadNativeAdInViewController:self placementTag:placement options:TDMediatedNativeAdOptionsAdChoicesTopLeft delegate:self];

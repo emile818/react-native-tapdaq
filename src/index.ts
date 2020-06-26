@@ -207,6 +207,13 @@ class RNTapdaq {
     return this.nativeModule.showRewardedVideo(placementTag)
   }
 
+  public loadAndShowNative = (placementTag: string): Promise<boolean> => {
+    return this.nativeModule.loadNativeAd(placementTag)
+  }
+  public loadAndShowStaticVideo = (placementTag: string): Promise<boolean> => {
+    return this.nativeModule.loadAndShowStaticVideo(placementTag)
+  }
+
   public addListerner = (callback: (message: string) => any): EmitterSubscription => {
     return tapdaqEventEmitter.addListener('tapdaq', callback)
   }

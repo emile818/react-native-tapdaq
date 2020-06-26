@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface RNTapdaqSharedController : UIViewController <TapdaqDelegate, TDAdRequestDelegate, TDClickableAdRequestDelegate, TDDisplayableAdRequestDelegate, TDRewardedVideoAdRequestDelegate,TDNativeAdRequestDelegate>
+@interface RNTapdaqSharedController : UIViewController <TapdaqDelegate, TDAdRequestDelegate, TDClickableAdRequestDelegate, TDDisplayableAdRequestDelegate, TDRewardedVideoAdRequestDelegate,TDNativeAdRequestDelegate,TDInterstitialAdRequestDelegate>
 
 @property (strong, nonatomic) RNPromise *initializationPromise;
 @property (strong, nonatomic) RNPromise *adLoadPromise;

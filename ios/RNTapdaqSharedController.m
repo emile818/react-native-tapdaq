@@ -285,8 +285,18 @@ _adDisplayPromise = promise;
     [_adDisplayPromise reject:error];
 }
 
-- (void)didCloseAdRequest:(TDAdRequest *)adRequest {
-    [self tapDelegate:@"Ad Closed"];
+//- (void)didCloseAdRequest:(TDAdRequest *)adRequest {
+  //  [self tapDelegate:@"Ad Closed"];
+//}
+- (void)didCloseAdRequest:(TDInterstitialAdRequest *)adRequest {
+    [[Tapdaq sharedSession] loadVideoForPlacementTag:adRequest.placement.tag delegate:self];
+}
+- (void)didLoadInterstitialAdRequest:(TDInterstitialAdRequest *)adRequest {
+
+        if (adRequest.placement.adUnit == TDUnitVideoInterstitial) {
+            [adRequest display];
+        }
+
 }
 
 - (void)didClickAdRequest:(TDAdRequest *)adRequest {

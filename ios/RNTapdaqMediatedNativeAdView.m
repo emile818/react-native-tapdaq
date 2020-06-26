@@ -48,7 +48,7 @@
 - (void)setPlacement:(NSString *)placement {
     _loaded = NO;
     [[RNTapdaqSharedController sharedController] addNativeDelegate:self ofPlacementTag:placement];
-    [[RNTapdaqSharedController sharedController] loadNativeAd:placement];
+   // [[RNTapdaqSharedController sharedController] loadNativeAd:placement];
     [self clearAdView];
     if (self.onCustomLoadStart) {
         self.onCustomLoadStart(@{

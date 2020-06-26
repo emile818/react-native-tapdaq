@@ -89,9 +89,9 @@ class RNTapdaq {
   public loadAndShowRandomAds = (placementTag: string): Promise<boolean> => {
     let type = Math.floor(Math.random() * 9)
     if (type === 0) {
-      return this.loadAndShowInterstitial(placementTag)
+      return this.loadAndShowStaticInterstitial(placementTag)
     } else if (type === 1) {
-      return this.loadAndShowRewarded(placementTag)
+      return this.loadAndShowRewardedVideo(placementTag)
     } else if (type === 2) {
       return this.loadAndShowBanner(placementTag)
     } else if (type === 3) {
@@ -109,7 +109,7 @@ class RNTapdaq {
     }
   }
 
-  public loadAndShowInterstitial = (placementTag: string): Promise<boolean> => {
+  public loadAndShowStaticInterstitial = (placementTag: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       // @ts-ignore
       this.loadInterstitial(placementTag).then((status, error) => {
@@ -181,7 +181,7 @@ class RNTapdaq {
     return this.nativeModule.isRewardedVideoReady(placementTag)
   }
 
-  public loadAndShowRewarded = (placementTag: string): Promise<boolean> => {
+  public loadAndShowRewardedVideo = (placementTag: string): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       // @ts-ignore
       this.loadRewardedVideo(placementTag).then((status, error) => {

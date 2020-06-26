@@ -29,13 +29,13 @@ setConsentGiven     |      value: boolean             | set Consent Given
 setIsAgeRestrictedUser     |    value: boolean               |setIsAgeRestrictedUser
 setUserSubjectToGDPR     |     value: boolean              | set User Subject To GDPR
 setUserId     |          id: string         | get the js version 
-loadAndShowInterstitial     |       placementTag: string             | load And Show Interstitial  banner
+loadAndShowStaticInterstitial     |       placementTag: string             | load And Show Interstitial  banner
 loadInterstitial     |     placementTag: string              | load the Interstitial
 showInterstitial     |   placementTag: string                | show the Interstitial 
 loadAndShowBanner     |       placementTag: string            | load and show the banner 
 hideBanner     |                   | hide the banner
 loadBannerForPlacementTagSize     |   placementTag: string,type: string,x: number,y: number,width: number,height: number,  | load and show the banner for specific stype and properties
-loadAndShowRewarded     |      placementTag: string             | load And ShowRewarded banner 
+loadAndShowRewardedVideo     |      placementTag: string             | load And ShowRewarded banner 
 loadRewardedVideo     |      placementTag: string             | load the Rewarded Video 
 showRewardedVideo     |        placementTag: string           | show the Rewarded Video banner
 

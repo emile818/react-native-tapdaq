@@ -150,7 +150,7 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void loadAndShowInterstitial(String placement, final Promise promise) {
+    public void loadAndShowStaticInterstitial(String placement, final Promise promise) {
         try {
             final RNTapdaqModule self = this;
             Tapdaq.getInstance().loadInterstitial(getCurrentActivity(), placement, new RNTapdaqAdListener(this, placement) {
@@ -359,7 +359,7 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void loadAndShowRewarded(final String placement, final Promise promise) {
+    public void loadAndShowRewardedVideo(final String placement, final Promise promise) {
         try {
             Boolean ready = Tapdaq.getInstance().isRewardedVideoReady(getCurrentActivity(), placement);
             if (ready) {

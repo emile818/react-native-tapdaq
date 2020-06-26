@@ -208,7 +208,7 @@ class RNTapdaq {
   }
 
   public loadAndShowNative = (placementTag: string): Promise<boolean> => {
-    return this.nativeModule.loadNativeAd(placementTag)
+    return this.nativeModule.loadAndShowNative(placementTag)
   }
   public loadAndShowStaticVideo = (placementTag: string): Promise<boolean> => {
     return this.nativeModule.loadAndShowStaticVideo(placementTag)

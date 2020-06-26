@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface RNTapdaqSharedController : UIViewController <TapdaqDelegate, TDAdRequestDelegate, TDClickableAdRequestDelegate, TDDisplayableAdRequestDelegate, TDRewardedVideoAdRequestDelegate>
+@interface RNTapdaqSharedController : UIViewController <TapdaqDelegate, TDAdRequestDelegate, TDClickableAdRequestDelegate, TDDisplayableAdRequestDelegate, TDRewardedVideoAdRequestDelegate,TDNativeAdRequestDelegate>
 
 @property (strong, nonatomic) RNPromise *initializationPromise;
 @property (strong, nonatomic) RNPromise *adLoadPromise;
@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadAndShowStaticVideo:(NSString *)placement promise:(RNPromise *)promise;
 
-- (void)loadNativeAd:(NSString *)placement;
+- (void)loadAndShowNative:(NSString *)placement  promise:(RNPromise *)promise;
 
 - (void)tapDelegate:(NSString *)message;
 

@@ -164,13 +164,27 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
   _adDisplayPromise = promise;
     [[Tapdaq sharedSession] showRewardedVideoForPlacementTag:placement];
 }
-- (void)loadAndShowStaticVideo:(NSString *)placement promise:(RNPromise *)promise{
- _adDisplayPromise = promise;
+- (void)loadAndShowStaticVideo:(NSString *)placement promise:(RNPromise *)promise {
+_adDisplayPromise = promise;
    [[Tapdaq sharedSession] loadVideoForPlacementTag:placement delegate:self];
+  //   [[Tapdaq sharedSession] showVideoForPlacementTag:placement delegate:self atPosition:TDBANER inView:<#(UIView *)#>
 }
 
-- (void)loadNativeAd:(NSString *)placement {
+- (void)loadAndShowNative:(NSString *)placement  promise:(RNPromise *)promise {
+ _adDisplayPromise = promise;
     [[Tapdaq sharedSession] loadNativeAdInViewController:self placementTag:placement options:TDMediatedNativeAdOptionsAdChoicesTopLeft delegate:self];
+
+
+}
+- (void)didLoadNativeAdRequest:(TDNativeAdRequest *)adRequest {
+   // if ([adRequest.placement.tag isEqualToString:@"my_native_tag"]) {
+
+    NSLog(@"ddd %@",adRequest.nativeAd.title);
+       // self.titleLabel.text = adRequest.nativeAd.title;
+       // self.subtitleLabel.text = adRequest.nativeAd.subtitle;
+       // self.bodyLabel.text = adRequest.nativeAd.body;
+    //}
+      [adRequest.nativeAd trackImpression];
 }
 
 - (void)presentDebugViewController {
@@ -227,6 +241,7 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 
 
 
+
         if(_xPosition>-1){
           bannerView.frame= CGRectMake(_xPosition,_yPosition, _width,_height);
         }
@@ -240,6 +255,10 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 
     }else
     if (adRequest.placement.adUnit == TDMediatedNativeAdViewTypeUnknown) {
+        [self informNativeDelegate:adRequest];
+        return;
+    }
+    if (adRequest.placement.adUnit == TDUnitMediatedNative) {
         [self informNativeDelegate:adRequest];
         return;
     }

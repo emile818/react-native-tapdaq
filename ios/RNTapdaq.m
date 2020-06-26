@@ -96,6 +96,21 @@ RCT_EXPORT_METHOD(loadInterstitial:(NSString *)placement
 }
 
 
+RCT_EXPORT_METHOD(loadAndShowStaticVideo:(NSString *)placement
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+    RNPromise *promise = [[RNPromise alloc] initWithResolver:resolve andRejector:reject];
+    [[RNTapdaqSharedController sharedController] loadAndShowStaticVideo:placement withPromise:promise];
+}
+
+RCT_EXPORT_METHOD(loadAndShowNative:(NSString *)placement
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject) {
+    RNPromise *promise = [[RNPromise alloc] initWithResolver:resolve andRejector:reject];
+    [[RNTapdaqSharedController sharedController] loadAndShowNative:placement withPromise:promise];
+}
+
+
 
 RCT_EXPORT_METHOD(showInterstitial:(NSString *)placement
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve

@@ -162,12 +162,12 @@ static RNTapdaqSharedController *rnTapdaqSharedController = nil;
 
 - (void)showRewardedVideo:(NSString *)placement promise:(RNPromise *)promise {
   _adDisplayPromise = promise;
-    [[Tapdaq sharedSession] showRewardedVideoForPlacementTag:placement];
+    [[Tapdaq sharedSession] showRewardedVideoForPlacementTag:placement delegate:self];
 }
 - (void)loadAndShowStaticVideo:(NSString *)placement promise:(RNPromise *)promise {
 _adDisplayPromise = promise;
    [[Tapdaq sharedSession] loadVideoForPlacementTag:placement delegate:self];
-  //   [[Tapdaq sharedSession] showVideoForPlacementTag:placement delegate:self atPosition:TDBANER inView:<#(UIView *)#>
+
 }
 
 - (void)loadAndShowNative:(NSString *)placement  promise:(RNPromise *)promise {
@@ -285,11 +285,9 @@ _adDisplayPromise = promise;
     [_adDisplayPromise reject:error];
 }
 
-//- (void)didCloseAdRequest:(TDAdRequest *)adRequest {
-  //  [self tapDelegate:@"Ad Closed"];
-//}
+
 - (void)didCloseAdRequest:(TDInterstitialAdRequest *)adRequest {
-    [[Tapdaq sharedSession] loadVideoForPlacementTag:adRequest.placement.tag delegate:self];
+
 }
 - (void)didLoadInterstitialAdRequest:(TDInterstitialAdRequest *)adRequest {
 

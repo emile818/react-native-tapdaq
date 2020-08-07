@@ -241,6 +241,8 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void loadBannerForPlacementTagSize(String placement, int type,int x, int y, int width, int height,final Promise promise) {
+
+    final int finaltype = type;
         try {
             runOnUiThread(new Runnable() {
 
@@ -256,18 +258,18 @@ public class RNTapdaqModule extends ReactContextBaseJavaModule {
                     params.gravity = Gravity.CENTER | Gravity.BOTTOM;
                     mBannerAd.setLayoutParams(params);
 
-                        if (type == 1) {
+                        if (finaltype == 1) {
                               mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.LARGE, new TMAdListener());
-                        } else if (type == 2) {
+                        } else if (finaltype == 2) {
                               mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.MEDIUM_RECT, new TMAdListener());
 
-                        } else if (type == 3) {
+                        } else if (finaltype == 3) {
                             mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.FULL, new TMAdListener());
 
-                        } else if (type == 4) {
+                        } else if (finaltype == 4) {
                           mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.LEADERBOARD, new TMAdListener());
 
-                        } else if (type == 5) {
+                        } else if (finaltype == 5) {
                             mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.SMART, new TMAdListener());
                         } else{
                          mBannerAd.load(getReactApplicationContext().getCurrentActivity(), TMBannerAdSizes.STANDARD, new TMAdListener());
